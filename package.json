@@ -3,7 +3,22 @@
   "version": "1.0.0",
   "description": "Starting place using gulp, sass, browserify, ect.",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
+    "gulp-cssnano": "^2.1.2",
+    "gulp-livereload": "^3.8.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
+    "i": "^0.3.5",
+    "npm": "^5.0.2",
+    "pump": "^1.0.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,5 +32,14 @@
   "bugs": {
     "url": "https://github.com/christopherwise/boilerplate/issues"
   },
-  "homepage": "https://github.com/christopherwise/boilerplate#readme"
+  "homepage": "https://github.com/christopherwise/boilerplate#readme",
+  "keywords": [
+    "Starting",
+    "place",
+    "using",
+    "gulp",
+    "sass",
+    "browserify",
+    "ect."
+  ]
 }

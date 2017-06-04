@@ -6,7 +6,7 @@ var babelify = require('babelify'),
     buffer = require('vinyl-buffer'),
     gulp = require('gulp'),
     // gutil     = require('gulp-util'),
-    livereload = require('gulp-livereload'),
+    connect = require('gulp-connect')
     rename = require('gulp-rename'),
     source = require('vinyl-source-stream'),
     uglify = require('gulp-uglify'),
@@ -56,7 +56,8 @@ gulp.task('sass', function(cb) {
         sass(),
         cssnano(),
         rename(function (path) {path.basename = "style"}),
-        gulp.dest('public/')
+        gulp.dest('public/'),
+        connect.reload()
     ], cb);
 });
 
@@ -67,15 +68,32 @@ gulp.task('compressJs', ['bundle'], function () {
         gulp.src('./js/built/*.js'),
         uglify(),
         rename(function(path) {path.basename = "script"}),
-        gulp.dest('./public')
+        gulp.dest('./public'),
+        connect.reload()
     ]);
+});
+
+// Update HTML for livereload
+gulp.task('html', function() {
+    return gulp.src([
+        './index.html'
+    ])
+    .pipe(connect.reload());
+});
+
+/// start up server for live reload
+gulp.task('connect', function() {
+  connect.server({
+    // root: 'blocGrid',
+    livereload: true
+  });
 });
 
 // Where gulp is watching
 gulp.task('watch', function() {
     "use strict";
-    gulp.watch('./js/*.js', ['bundle', 'sass', 'compressJs']);
-    gulp.watch('./css/*.css', ['bundle', 'sass', 'compressJs']);
-    gulp.watch('./*.html', ['bundle', 'sass', 'compressJs']);
+    gulp.watch('./js/*.js', ['bundle', 'compressJs']);
+    gulp.watch('./sass/*.scss', ['bundle', 'sass']);
+    gulp.watch('./*.html', ['html']);
 });
-gulp.task('default', ['watch']);
+gulp.task('default', ['connect', 'watch']);
